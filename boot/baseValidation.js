@@ -2,8 +2,6 @@ import { ValidationObserver, ValidationProvider, extend } from 'vee-validate/dis
 
 class BaseValidate {
 	constructor() {
-		super();
-
 		this._regexAlphanumeric = /^[a-zA-Z0-9]+(['\-a-zA-Z0-9 ]*)*$/;
 		this._regexDecimalMap = new Map();
 	}
