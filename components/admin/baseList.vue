@@ -42,7 +42,7 @@ export default {
 			this.dialogDeleteSignal.open();
 		},
 		async dialogDeletePreCompleteOk() {
-			return await this.dialogDeletePreCompleteOkDelete(this.$store.dispatcher, this.dialogDeleteItemId);
+			return await this.dialogDeletePreCompleteOkDelete(this.correlationId(), this.$store.dispatcher, this.dialogDeleteItemId);
 		},
 		// eslint-disable-next-line
 		async dialogDeletePreCompleteOkDelete(dispatcher, id) {
