@@ -4,4 +4,5 @@
 
 ### Installation
 
-[![NPM](https://nodei.co/npm/@thzero/library_client_vue.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
+Include as a submodule namned 'library_vue' in the Vue application's source folder.
+
