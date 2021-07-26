@@ -1,6 +1,7 @@
 <script>
 import LibraryConstants from '@thzero/library_client/constants';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
 import LibraryUtility from '@thzero/library_common/utility';
 
 import Response from '@thzero/library_common/response';
@@ -15,7 +16,7 @@ export default {
 		serverErrors: []
 	}),
 	async created() {
-		this.logger = this.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_LOGGER);
+		this.logger = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_LOGGER);
 	},
 	methods: {
 		correlationId() {

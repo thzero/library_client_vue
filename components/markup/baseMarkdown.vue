@@ -1,23 +1,12 @@
-<template>
-	<div>
-		<!-- eslint-disable vue/no-v-html -->
-		<div
-			class="markdown-body"
-			v-html="display"
-		/>
-		<!--eslint-enable-->
-	</div>
-</template>
-
 <script>
-import Vue from 'vue';
-
 import LibraryConstants from '@thzero/library_client/constants';
 
-import base from '../base';
+import GlobalUtility from '@thzero/library_client/utility/global';
+
+import base from '@/library_vue/components/base';
 
 export default {
-	name: 'Markdown',
+	name: 'baseMarkdown',
 	extends: base,
 	props: {
 		value: {
@@ -32,10 +21,7 @@ export default {
 		}
 	},
 	created() {
-		this._serviceMarkup = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
+		this._serviceMarkup = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
 	}
 };
 </script>
-
-<style scoped>
-</style>

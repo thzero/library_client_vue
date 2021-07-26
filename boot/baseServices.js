@@ -1,3 +1,5 @@
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import BaseServices from '@thzero/library_client/boot/baseServices';
 
 import eventService from '../service/event';
@@ -8,6 +10,7 @@ import translateService from '../service/translate';
 class VueBaseServices extends BaseServices {
 	_initializInjector(framework, injector) {
 		framework.prototype.$injector = injector;
+		GlobalUtility.$injector = injector;
 	}
 
 	_initializeEvent(injector) {

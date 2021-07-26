@@ -1,7 +1,6 @@
-import Vue from 'vue';
-
 import LibraryConstants from '@thzero/library_client/constants';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
 import LibraryUtility from '@thzero/library_common/utility';
 import VueUtility from '../../utility/index';
 
@@ -11,7 +10,7 @@ const store = {
 	},
 	actions: {
 		async createAdminNews({ commit }, params) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
 			const response = await service.create(params.correlationId, params.item);
 			this.$logger.debug('store.admin.news', 'createAdminNews', 'response', response);
 			if (response && response.success)
@@ -19,23 +18,23 @@ const store = {
 			return response;
 		},
 		async deleteAdminNews({ commit }, params) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
 			const response = await service.delete(params.correlationId, params.id);
 			this.$logger.debug('store.admin.news', 'deleteAdminNews', 'response', response);
 			if (response && response.success) {
 				commit('deleteAdminNews', params);
-				Vue.prototype.$store.dispatcher.news.delete(params.correlationId, params.id);
+				GlobalUtility.$store.dispatcher.news.delete(params.correlationId, params.id);
 			}
 			return response;
 		},
 		async searchAdminNews({ commit }, params) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
 			const response = await service.search(params.correlationId, params.params);
 			this.$logger.debug('store.admin.news', 'searchAdminNews', 'response', response);
 			commit('setAdminNewsListing', { correlationId: params.correlationId, list: response.success && response.results ? response.results.data : null });
 		},
 		async updateAdminNews({ commit }, params) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS);
 			const response = await service.update(params.correlationId, params.item);
 			this.$logger.debug('store.admin.news', 'updateAdminNews', 'response', response);
 			if (response && response.success)
@@ -62,16 +61,16 @@ const store = {
 	},
 	dispatcher: {
 		async createAdminNews(correlationId, item) {
-			return await Vue.prototype.$store.dispatch('createAdminNews', { correlationId: correlationId, item: item });
+			return await GlobalUtility.$store.dispatch('createAdminNews', { correlationId: correlationId, item: item });
 		},
 		async deleteAdminNews(correlationId, id) {
-			return await Vue.prototype.$store.dispatch('deleteAdminNews', { correlationId: correlationId, id: id });
+			return await GlobalUtility.$store.dispatch('deleteAdminNews', { correlationId: correlationId, id: id });
 		},
 		async searchNews(correlationId, params) {
-			await Vue.prototype.$store.dispatch('searchAdminNews', { correlationId: correlationId, params: params });
+			await GlobalUtility.$store.dispatch('searchAdminNews', { correlationId: correlationId, params: params });
 		},
 		async updateAdminNews(correlationId, item) {
-			return await Vue.prototype.$store.dispatch('updateAdminNews', { correlationId: correlationId, item: item });
+			return await GlobalUtility.$store.dispatch('updateAdminNews', { correlationId: correlationId, item: item });
 		}
 	}
 };

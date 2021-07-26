@@ -1,5 +1,5 @@
 <script>
-import Vue from 'vue';
+import GlobalUtility from '@thzero/library_client/utility/global';
 
 import base from './base';
 
@@ -8,7 +8,7 @@ export default {
 	extends: base,
 	computed: {
 		imageWidth() {
-			let width = (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth);
+			const width = (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth);
 			if (width > 512)
 				return '512px';
 
@@ -17,7 +17,7 @@ export default {
 	},
 	methods: {
 		clickHome() {
-			Vue.prototype.$navRouter.push('/');
+			GlobalUtility.$navRouter.push('/');
 		}
 	}
 };

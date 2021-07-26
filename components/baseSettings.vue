@@ -1,11 +1,13 @@
 <script>
 import LibraryConstants from '@thzero/library_client/constants';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import Response from '@thzero/library_common/response';
 
-import VConfirmationDialog from './VConfirmationDialog';
-import VFormControl from './form/VFormControl';
-import VTextFieldWithValidation from './form/VTextFieldWithValidation';
+import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
+import VFormControl from '@/library_vue_vuetify/components/form/VFormControl';
+import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
 
 export default {
 	name: 'BaseSettings',
@@ -33,12 +35,12 @@ export default {
 			return (this.user != null && this.user.external.picture != null ? this.user.external.picture : null);
 		},
 		user() {
-			return this.$store.state.user.user;
+			return GlobalUtility.$store.state.user.user;
 		}
 	},
 	async created() {
 		await this.reset(this.correlationId(), null);
-		this.serviceUsers = this.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
+		this.serviceUsers = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
 	},
 	async mount() {
 		await this.reset(this.correlationId(), null);
