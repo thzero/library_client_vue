@@ -1,4 +1,6 @@
 <script>
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import TabSupport from './support/tab';
 
 import base from './base';
@@ -15,7 +17,7 @@ export default {
 	},
 	async mounted() {
 		const self = this;
-		this.$EventBus.$on('toggle-drawer', () => {
+		GlobalUtility.$EventBus.on('toggle-drawer', () => {
 			self.drawer = !self.drawer;
 		});
 	},

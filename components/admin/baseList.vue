@@ -1,10 +1,11 @@
 <script>
+import GlobalUtility from '@thzero/library_client/utility/global';
 import LibraryUtility from '@thzero/library_common/utility';
 
 import baseEdit from '../baseEdit';
-import VConfirmationDialog from '../VConfirmationDialog';
+import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
 
-import DialogSupport from '../support/dialog';
+import DialogSupport from '@/library_vue/components/support/dialog';
 
 export default {
 	name: 'BaseAdminList',
@@ -42,7 +43,7 @@ export default {
 			this.dialogDeleteSignal.open();
 		},
 		async dialogDeletePreCompleteOk() {
-			return await this.dialogDeletePreCompleteOkDelete(this.correlationId(), this.$store.dispatcher, this.dialogDeleteItemId);
+			return await this.dialogDeletePreCompleteOkDelete(this.correlationId(), GlobalUtility.$store.dispatcher, this.dialogDeleteItemId);
 		},
 		// eslint-disable-next-line
 		async dialogDeletePreCompleteOkDelete(dispatcher, id) {
@@ -56,7 +57,7 @@ export default {
 		},
 		async dialogEditOpen(item, isNew) {
 			const title = isNew ? 'titles.new' : 'titles.edit';
-			this.dialogEditItemTitle = this.$trans.t(title);
+			this.dialogEditItemTitle = GlobalUtility.$trans.t(title);
 			await this.$refs.editDialog.reset(this.correlationId(), this.clone(item ? item : LibraryUtility.instantiate(this.defaultItem())));
 			this.dialogEditSignal.open();
 		},

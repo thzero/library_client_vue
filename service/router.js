@@ -1,11 +1,11 @@
-import Vue from 'vue';
+import GlobalUtility from '@thzero/library_client/utility/global';
 
 import RouterService from '@thzero/library_client/service/router';
 
 class VueRouterService extends RouterService {
 	// eslint-disable-next-line
 	route(path, options) {
-		Vue.prototype.$navRouter.push(path);
+		GlobalUtility.$navRouter.push(path);
 	}
 }
 

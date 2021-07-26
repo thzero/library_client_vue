@@ -1,15 +1,15 @@
 <script>
-import Vue from 'vue';
-
 import LibraryConstants from '@thzero/library_client/constants';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import baseLayout from './baseLayout';
-import VLayoutFooter from '../components/VLayoutFooter';
-import VLoadingOverlay from '../components/VLoadingOverlay';
+import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
+import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
 
-import DialogSupport from '../components/support/dialog';
+import DialogSupport from '@/library_vue/components/support/dialog';
 
-const auth = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
+const auth = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
 
 export default {
 	name: 'BaseMainLayout',
@@ -26,24 +26,24 @@ export default {
 	}),
 	computed: {
 		isAuthCompleted() {
-			return this.$store.state.user && this.$store.state.user.authCompleted;
+			return GlobalUtility.$store.state.user && GlobalUtility.$store.state.user.authCompleted;
 		},
 		isLoggedIn() {
-			return this.$store.state.user && this.$store.state.user.isLoggedIn;
+			return GlobalUtility.$store.state.user && GlobalUtility.$store.state.user.isLoggedIn;
 		}
 	},
 	methods: {
 		clickAbout() {
-			this.$navRouter.push('/about');
+			GlobalUtility.$navRouter.push('/about');
 		},
 		clickOpenSource() {
-			this.$navRouter.push('/openSource');
+			GlobalUtility.$navRouter.push('/openSource');
 		},
 		async clickSignIn() {
-			this.$navRouter.push('/auth');
+			GlobalUtility.$navRouter.push('/auth');
 		},
 		clickSupport() {
-			this.$navRouter.push('/support');
+			GlobalUtility.$navRouter.push('/support');
 		},
 		async dialogSignOutOk() {
 			this.dialogSignOut.ok();
@@ -51,7 +51,7 @@ export default {
 		},
 		toggleDrawer() {
 			// this.drawer = !this.drawer
-			this.$EventBus.$emit('toggle-drawer');
+			GlobalUtility.$EventBus.emit('toggle-drawer');
 		}
 	}
 };

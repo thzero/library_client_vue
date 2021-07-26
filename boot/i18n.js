@@ -13,4 +13,5 @@ export default async ({ Vue, app }) => {
 	});
 	app.i18n = i18n;
 	Vue.prototype.$trans = i18n;
+	GlobalUtility.$trans = il8n;
 };

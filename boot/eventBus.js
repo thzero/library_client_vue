@@ -1,9 +1,11 @@
 import Vue from 'vue';
 
-const EventBus = new Vue();
+import mitt from 'mitt';
 
-export default async ({
-	Vue
-}) => {
+import GlobalUtility from '@thzero/library_client/utility/global';
+
+export default async () => {
+	const EventBus = mitt();
 	Vue.prototype.$EventBus = EventBus;
+	GlobalUtility.$EventBus = EventBus;
 };

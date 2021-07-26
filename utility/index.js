@@ -1,8 +1,8 @@
-import Vue from 'vue';
-
 import Constants from '../constants';
 import LibraryConstants from '@thzero/library_client/constants';
 import LibraryCommonConstants from '@thzero/library_common/constants';
+
+import GlobalUtility from '@thzero/library_client/utility/global';
 
 class Utility {
 	static applyError(error, messageParams) {
@@ -30,7 +30,7 @@ class Utility {
 				let suffix = param.suffix;
 				if (String.isNullOrEmpty(suffix))
 					suffix = Constants.ErrorCodes.SuffixParams;
-				param.value = Vue.prototype.$trans.t(`${suffix}.${param.value}`);
+				param.value = GlobalUtility.$trans.t(`${suffix}.${param.value}`);
 			}
 			messageParams[field] = param.value;
 		}
@@ -39,7 +39,7 @@ class Utility {
 			messageCode = Constants.ErrorCodes.Default;
 
 		return {
-			message: Vue.prototype.$trans.t(`${Constants.ErrorCodes.Suffix}.${messageCode}`, messageParams),
+			message: GlobalUtility.$trans.t(`${Constants.ErrorCodes.Suffix}.${messageCode}`, messageParams),
 			field: (error.field ? error.field : LibraryCommonConstants.ErrorFields.Generic)
 		};
 	}
@@ -97,7 +97,7 @@ class Utility {
 
 		object.setErrors(errors);
 		// object.validation().applyResult({
-		//     errors: [ Vue.prototype.$trans.t(`${Constants.ErrorCodes.Suffix}.${messageCode}`, messageParams) ],
+		//     errors: [ GlobalUtility.$trans.t(`${Constants.ErrorCodes.Suffix}.${messageCode}`, messageParams) ],
 		//     valid: false,
 		//     failedRules: {} // should be empty since this is a manual error.
 		//   })
@@ -109,19 +109,19 @@ class Utility {
 			return;
 		}
 
-		Vue.prototype.$navRouter.push('/');
+		GlobalUtility.$navRouter.push('/');
 	}
 
 	static overlayImageWidth() {
-		let width = (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth);
+		const width = (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth);
 		if (width > 512)
 			return '512px';
 
-		return width *.75 + 'px';
+		return width * 0.75 + 'px';
 	}
 
 	static overlayProgressSize() {
-		return (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth) * .25;
+		return (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth) * 0.25;
 	}
 
 	static randomKeyGen() {
@@ -142,7 +142,7 @@ class Utility {
 	}
 
 	static settings() {
-		return Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_SETTINGS);
+		return GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_SETTINGS);
 	}
 
 	static updateArrayById(array, object) {
@@ -158,7 +158,7 @@ class Utility {
 		// 	array[index] = object
 
 		// return array
-		let result = [
+		const result = [
 			...array.filter(element => element.id !== object.id),
 			object
 		];

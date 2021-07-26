@@ -1,7 +1,6 @@
-import Vue from 'vue';
-
 import LibraryConstants from '@thzero/library_client/constants';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
 import VueUtility from '../../utility/index';
 
 const store = {
@@ -16,13 +15,13 @@ const store = {
 	actions: {
 		// eslint-disable-next-line
 		async getUserFavorites(correlationId) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
 			const response = await service.fetchFavoritesByGamerId(correlationId, this.state.user.user);
 			this.$logger.debug('store.user', 'getUserFavorites', 'response', response);
 			return response;
 		},
 		async refreshUserSettings({ commit }, correlationId) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
 			const response = await service.refreshSettings(correlationId, this.state.user.user);
 			this.$logger.debug('store.user', 'refreshUserSettings', 'response', response);
 			if (response && response.success && response.results)
@@ -42,7 +41,7 @@ const store = {
 			commit('setUserLoggedIn', params);
 		},
 		async setUserSettings({ commit }, params) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
 			params.settings = VueUtility.settings().mergeUser(params.correlationId, params.settings);
 			const response = await service.updateSettings(params.correlationId, this.state.user.user, params.settings);
 			this.$logger.debug('store.user', 'setUserSettings', 'response', response);
@@ -91,31 +90,31 @@ const store = {
 	},
 	dispatcher: {
 		async getUserFavorites(correlationId) {
-			return await Vue.prototype.$store.dispatch('getUserFavorites', correlationId);
+			return await GlobalUtility.$store.dispatch('getUserFavorites', correlationId);
 		},
 		async refreshUserSettings(correlationId) {
-			await Vue.prototype.$store.dispatch('refreshUserSettings', correlationId);
+			await GlobalUtility.$store.dispatch('refreshUserSettings', correlationId);
 		},
 		async resetUser(correlationId) {
-			await Vue.prototype.$store.dispatch('resetUser', correlationId);
+			await GlobalUtility.$store.dispatch('resetUser', correlationId);
 		},
 		async setAuthCompleted(correlationId, authCompleted) {
-			await Vue.prototype.$store.dispatch('setUserAuthCompleted', { correlationId: correlationId, authCompleted: authCompleted });
+			await GlobalUtility.$store.dispatch('setUserAuthCompleted', { correlationId: correlationId, authCompleted: authCompleted });
 		},
 		async setClaims(correlationId, claims) {
-			await Vue.prototype.$store.dispatch('setUserClaims', { correlationId: correlationId, authCompleted: claims });
+			await GlobalUtility.$store.dispatch('setUserClaims', { correlationId: correlationId, authCompleted: claims });
 		},
 		async setLoggedIn(correlationId, isLoggedIn) {
-			await Vue.prototype.$store.dispatch('setUserLoggedIn', { correlationId: correlationId, isLoggedIn: isLoggedIn });
+			await GlobalUtility.$store.dispatch('setUserLoggedIn', { correlationId: correlationId, isLoggedIn: isLoggedIn });
 		},
 		async setUserSettings(correlationId, settings) {
-			return await Vue.prototype.$store.dispatch('setUserSettings', { correlationId: correlationId, settings: settings });
+			return await GlobalUtility.$store.dispatch('setUserSettings', { correlationId: correlationId, settings: settings });
 		},
 		async setTokenResult(correlationId, tokenResult) {
-			await Vue.prototype.$store.dispatch('setUserTokenResult', { correlationId: correlationId, tokenResult: tokenResult });
+			await GlobalUtility.$store.dispatch('setUserTokenResult', { correlationId: correlationId, tokenResult: tokenResult });
 		},
 		async setUser(correlationId, user) {
-			await Vue.prototype.$store.dispatch('setUser', { correlationId: correlationId, user: user });
+			await GlobalUtility.$store.dispatch('setUser', { correlationId: correlationId, user: user });
 		}
 	}
 };

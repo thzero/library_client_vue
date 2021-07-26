@@ -1,98 +1,13 @@
-<template>
-	<vue-fragment>
-		<ValidationObserver
-			ref="obs"
-			v-slot="{ invalid }"
-		>
-			<v-dialog
-				v-model="dialogSignal"
-				v-resize="onResize"
-				persistent
-				:scrollable="scrollableI"
-				:max-width="maxWidth"
-				:fullscreen="fullscreen"
-				@keydown.esc="handleCancel"
-			>
-				<v-card>
-					<v-card-title class="headline">
-						{{ label }}
-					</v-card-title>
-					<v-card-text
-						:style="scrollableHeightI"
-					>
-						<v-form>
-							<slot />
-							<div
-								v-for="(item, index) in serverErrors"
-								:key="index"
-								class="red--text text--lighten-1 v-messages"
-							>
-								{{ item }}
-							</div>
-						</v-form>
-					</v-card-text>
-					<v-card-actions>
-						<v-spacer />
-						<v-btn
-							v-if="buttonDelete"
-							color="error lighten-1"
-							text
-							@click="handleDelete"
-						>
-							{{ $t('buttons.delete') }}
-						</v-btn>
-						<v-btn
-							v-if="buttonClear"
-							color="primary lighten-1"
-							text
-							@click="handleClear"
-						>
-							{{ $t('buttons.clear') }}
-						</v-btn>
-						<v-btn
-							v-if="buttonCancel"
-							color="primary lighten-1"
-							text
-							@click="handleCancel"
-						>
-							{{ $t('buttons.cancel') }}
-						</v-btn>
-						<v-btn
-							v-if="buttonOk"
-							:disabled="invalid || disabled"
-							color="green darken-1"
-							text
-							@click="submit"
-						>
-							{{ $t('buttons.ok') }}
-						</v-btn>
-					</v-card-actions>
-				</v-card>
-			</v-dialog>
-		</ValidationObserver>
-		<VConfirmationDialog
-			v-if="buttonDelete"
-			:non-recoverable="true"
-			:signal="dialogDeleteConfirmSignal.signal"
-			@cancel="dialogDeleteConfirmSignal.cancelI()"
-			@ok="handleDeleteConfirmOk"
-		/>
-	</vue-fragment>
-</template>
-
 <script>
-import VueUtility from '@/library_vue/utility/index';
+import GlobalUtility from '@/thzero/library_client/utility/global';
+import VueUtility from '../../utility/index';
 
 import baseEdit from '../baseEdit';
-import VConfirmationDialog from '../VConfirmationDialog';
 
 import DialogSupport from '../support/dialog';
 
 export default {
-	name: 'FormDialog',
-	components: {
-		VConfirmationDialog
-	},
+	name: 'BaseFormDialogControl',
 	extends: baseEdit,
 	props: {
 		buttonCancel: {
@@ -121,7 +36,7 @@ export default {
 		},
 		maxWidth: {
 			type: String,
-			default: '300px'
+			default: '600px'
 		},
 		preCompleteDelete: {
 			type: Function,
@@ -131,13 +46,17 @@ export default {
 			type: Function,
 			default: null
 		},
+		resetDialog: {
+			type: Function,
+			default: null
+		},
 		scrollable: {
 			type: Boolean,
 			default: false
 		},
 		scrollableAutoResize: {
 			type: Boolean,
-			default: false
+			default: true
 		},
 		scrollableAutoResizeFactor: {
 			type: Number,
@@ -145,12 +64,24 @@ export default {
 		},
 		scrollableHeight: {
 			type: String,
-			default: null
+			default: '500'
 		},
 		signal: {
 			type: Boolean,
 			default: false
+		},
+		validation: {
+			type: Object,
+			default: null
+		},
+		width: {
+			type: String,
+			default: '600px'
 		}
+	},
+	setup (props) {
+		return Object.assign(baseEdit.setup(props), {
+		});
 	},
 	data: () => ({
 		dialogHeightI: 300,
@@ -187,7 +118,7 @@ export default {
 			this.serverErrors = [];
 			this.logger.debug('FormDialog', 'clear', 'clear', null, correlationId);
 			this.$nextTick(() => {
-				this.$refs.obs.reset(correlationId);
+				// this.$refs.obs.reset(correlationId);
 			});
 			this.disabled = false;
 		},
@@ -217,7 +148,7 @@ export default {
 				const response = await this.preCompleteDelete(correlationId);
 				this.logger.debug('FormDialog', 'handleDeleteConfirmOk', 'response', response, correlationId);
 				if (!response || !response.success) {
-					VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
+					// VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
 					return;
 				}
 			}
@@ -227,14 +158,12 @@ export default {
 			this.$emit('ok');
 			this.clear(correlationId);
 		},
-		observer() {
-			this.$refs.obs;
-		},
 		onResize() {
 			const temp = window.innerHeight - 200;
 			this.dialogHeightI = Math.ceil(temp * this.scrollableAutoResizeFactor);
 		},
 		async reset(correlationId, value) {
+			await this.validation.$validate();
 			const timer = setInterval(async () => {
 				clearInterval(timer);
 				const el = document.getElementsByClassName('v-card__text');
@@ -244,26 +173,28 @@ export default {
 			await this.resetDialog(correlationId, value);
 		},
 		// eslint-disable-next-line
-		async resetDialog(correlationId, value) {
-		},
+		// async resetDialog(correlationId, value) {
+		// },
 		setErrors(errors) {
-			this.$refs.obs.setErrors(errors);
+			// this.$refs.obs.setErrors(errors);
 		},
 		async submit() {
 			this.serverErrors = [];
 
 			const correlationId = this.correlationId();
 
-			const result = await this.$refs.obs.validate(correlationId);
+			// const result = await this.$refs.obs.validate(correlationId);
+			const result = await this.validation.$validate();
 			this.logger.debug('FormDialog', 'submit', 'result', result, correlationId);
 			if (!result)
 				return;
 
+			let response = { success: true, route: null };
 			if (this.preCompleteOk) {
-				const response = await this.preCompleteOk(correlationId);
+				response = await this.preCompleteOk(correlationId);
 				this.logger.debug('FormDialog', 'submit', 'response', response, correlationId);
 				if (!response || !response.success) {
-					VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
+					// VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
 					return;
 				}
 			}
@@ -272,10 +203,10 @@ export default {
 			this.logger.debug('FormDialog', 'submit', 'ok', null, correlationId);
 			this.$emit('ok');
 			this.clear(correlationId);
+
+			if (!String.isNullOrEmpty(response.route))
+				GlobalUtility.$navRouter.push(response.route);
 		}
 	}
 };
 </script>
-
-<style scoped>
-</style>

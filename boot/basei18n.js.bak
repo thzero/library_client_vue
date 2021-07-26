@@ -20,8 +20,8 @@ class VueBasei18n extends Basei18n {
 		});
 		app.i18n = i18n;
 		framework.prototype.$trans = i18n;
-		GlobalUtility.i18n = i18n;
-		GlobalUtility.$trans = i18n;
+		GlobalUtility.i18n = i18n.global;
+		GlobalUtility.$trans = i18n.global;
 	}
 
 	_initMessages() {

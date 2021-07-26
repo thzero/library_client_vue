@@ -1,18 +1,18 @@
-import Vue from 'vue';
+import GlobalUtility from '@thzero/library_client/utility/global';
 
 import Service from '@thzero/library_client/service/index';
 
 class VuexStoreService extends Service {
 	get dispatcher() {
-		return Vue.prototype.$store.dispatcher;
+		return GlobalUtility.$store.dispatcher;
 	}
 
 	get getters() {
-		return Vue.prototype.$store.getters;
+		return GlobalUtility.$store.getters;
 	}
 
 	get state() {
-		return Vue.prototype.$store.state;
+		return GlobalUtility.$store.state;
 	}
 }
 

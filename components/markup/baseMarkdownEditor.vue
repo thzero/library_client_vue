@@ -1,44 +1,12 @@
-<template>
-	<v-container pa-0>
-		<v-row>
-			<v-col
-				cols="6"
-				class="pa-0"
-			>
-				<VTextAreaWithValidation
-					ref="markdown"
-					v-model="innerValue"
-					:vid="vid"
-				/>
-			</v-col>
-			<v-col
-				cols="6"
-				class="pa-0"
-			>
-				<!-- eslint-disable vue/no-v-html -->
-				<div
-					class="markdown-body mt-3 ml-2"
-					v-html="preview"
-				/>
-				<!--eslint-enable-->
-			</v-col>
-		</v-row>
-	</v-container>
-</template>
-
 <script>
-import Vue from 'vue';
-
 import LibraryConstants from '@thzero/library_client/constants';
 
-import base from '../base';
-import VTextAreaWithValidation from '../form/VTextAreaWithValidation';
+import GlobalUtility from '@thzero/library_client/utility/global';
+
+import base from '@/library_vue/components/base';
 
 export default {
-	name: 'MarkdownEditor',
-	components: {
-		VTextAreaWithValidation
-	},
+	name: 'baseMarkdownEditor',
 	extends: base,
 	props: {
 		value: {
@@ -67,7 +35,7 @@ export default {
 		}
 	},
 	created() {
-		this._serviceMarkup = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
+		this._serviceMarkup = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER);
 	},
 	mounted() {
 			this.initValue(this.value);
@@ -85,6 +53,3 @@ export default {
 	}
 };
 </script>
-
-<style scoped>
-</style>

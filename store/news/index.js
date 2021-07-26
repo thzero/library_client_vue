@@ -1,7 +1,6 @@
-import Vue from 'vue';
-
 import LibraryConstants from '@thzero/library_client/constants';
 
+import GlobalUtility from '@thzero/library_client/utility/global';
 import LibraryUtility from '@thzero/library_common/utility';
 
 const store = {
@@ -13,7 +12,7 @@ const store = {
 			commit('deleteNews', params);
 		},
 		async getLatestNews({ commit }, correlationId) {
-			const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_NEWS);
+			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_NEWS);
 			const response = await service.latest(correlationId);
 			this.$logger.debug('store.news', 'getLatestNews', 'response', response);
 			commit('setLatestNews', { correlationId: correlationId, latest: response.success && response.results ? response.results.data : null });
@@ -32,10 +31,10 @@ const store = {
 	},
 	dispatcher: {
 		async delete(correlationId, id) {
-			await Vue.prototype.$store.dispatch('deleteNews', { correlationId: correlationId, id: id });
+			await GlobalUtility.$store.dispatch('deleteNews', { correlationId: correlationId, id: id });
 		},
 		async getLatest(correlationId) {
-			await Vue.prototype.$store.dispatch('getLatestNews', correlationId);
+			await GlobalUtility.$store.dispatch('getLatestNews', correlationId);
 		}
 	}
 };

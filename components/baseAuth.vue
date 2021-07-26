@@ -1,39 +1,7 @@
-<template>
-	<v-container fluid>
-		<v-row justify="center">
-			<v-card>
-				<v-card-text
-					style="min-width: 300px;"
-				>
-					<v-container fluid>
-						<v-row justify="center">
-							<v-btn
-								v-if="display"
-								:disabled="disabled"
-								color="primary"
-								@click="signInGoogle"
-							>
-								{{ $t('auth.google') }}
-							</v-btn>
-						</v-row>
-						<v-row justify="center">
-							<v-switch
-								v-if="allowRememberMe"
-								v-model="rememberMe"
-								:label="$t('auth.rememberMe')"
-							/>
-						</v-row>
-					</v-container>
-				</v-card-text>
-			</v-card>
-		</v-row>
-	</v-container>
-</template>
-
 <script>
-import Vue from 'vue';
-
 import LibraryConstants from '@thzero/library_client/constants';
+
+import GlobalUtility from '@thzero/library_client/utility/global';
 
 import base from './base';
 
@@ -42,7 +10,7 @@ export default {
 	extends: base,
 	data: () => ({
 		allowRememberMe: false,
-		available: false,
+		authenticated: false,
 		disabled: false,
 		isLoggedIn: false,
 		rememberMe: false,
@@ -54,16 +22,16 @@ export default {
 		}
 	},
 	async beforeCreate() {
-		this.features = this.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_FEATURES);
+		this.features = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_FEATURES);
 		this.allowRememberMe = this.features && this.features.features ? this.features.features.RememberMe : false;
-		this.auth = this.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
-		this.available = await this.auth.isAuthenticated;
-		if (this.available)
-			this.$navRouter.push('/');
+		this.auth = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
+		this.authenticated = await this.auth.isAuthenticated;
+		if (this.authenticated)
+			GlobalUtility.$navRouter.push('/');
 	},
 	async mounted() {
 		await this.auth.signInCompleted();
-		Vue.prototype.$EventBus.$on('auth', isLoggedIn => {
+		GlobalUtility.$EventBus.on('auth', isLoggedIn => {
 			this.logger.debug('BaseAuth', 'mounted', 'isLoggedIn', isLoggedIn, this.correlationId());
 			this.isLoggedIn = isLoggedIn;
 			this.disabled = isLoggedIn;
@@ -78,18 +46,3 @@ export default {
 };
 </script>
 
-<style>
-#federatedSignIn {
-	width: 100%;
-}
-#google button {
-	width: 250px;
-}
-#google button span {
-	padding-top: 13px;
-	padding-left: 26px;
-	padding-bottom: 12px;
-	font-size: 18px;
-	font-family: Roboto, sans-serif;
-}
-</style>

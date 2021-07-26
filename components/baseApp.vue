@@ -1,11 +1,13 @@
 <script>
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import base from './base';
 
 export default {
 	name: 'BaseApp',
 	extends: base,
 	async created() {
-		this.$EventBus.$on('auth-refresh', async (user) => {
+		GlobalUtility.$EventBus.on('auth-refresh', async (user) => {
 			const correlationId = this.correlationId();
 			this.logger.debug('BaseApp', 'created', 'auth-refresh', user, correlationId);
 			let items = await this.initialize(correlationId);
@@ -22,8 +24,8 @@ export default {
 				return;
 			await Promise.all(items);
 			// await Promise.all([
-			// 	this.$store.dispatcher.root.initialize(correlationId),
-			// 	this.$store.dispatcher.characters.initializeCharacters(correlationId)
+			// 	GlobalUtility.$store.dispatcher.root.initialize(correlationId),
+			// 	GlobalUtility.$store.dispatcher.characters.initializeCharacters(correlationId)
 			// ])
 		})().catch(err => {
 			// eslint-disable-next-line
@@ -38,9 +40,3 @@ export default {
 };
 </script>
 
-<style>
-	.displayLink {
-		cursor: pointer;
-		text-decoration: underline;
-	}
-</style>

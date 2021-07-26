@@ -1,4 +1,6 @@
 <script>
+import GlobalUtility from '@thzero/library_client/utility/global';
+
 import baseList from '../baseList';
 
 export default {
@@ -6,12 +8,12 @@ export default {
 	extends: baseList,
 	computed: {
 		users() {
-			const users = this.$store.state.adminUsers.users;
+			const users = GlobalUtility.$store.state.adminUsers.users;
 			return users ? users.slice(0) : [];
 		}
 	},
 	async mounted() {
-		await this.$store.dispatcher.adminUsers.searchAdminUsers(this.correlationId(), {});
+		await GlobalUtility.$store.dispatcher.adminUsers.searchAdminUsers(this.correlationId(), {});
 	},
 	methods: {
 		defaultItem() {
@@ -21,11 +23,11 @@ export default {
 		},
 		initializeHeaders() {
 			return [
-				{ text: this.$trans.t('users.name'), align: 'left', value: 'external.name', },
-				{ text: this.$trans.t('users.id'), align: 'left', value: 'external.id', },
-				{ text: this.$trans.t('users.externalId'), align: 'left', value: 'external.externalId', },
-				{ text: this.$trans.t('users.roles'), align: 'left', value: 'roles' },
-				{ text: this.$trans.t('users.actions'), align: 'right', value: 'action', sortable: false }
+				{ text: GlobalUtility.$trans.t('users.name'), align: 'left', value: 'external.name', },
+				{ text: GlobalUtility.$trans.t('users.id'), align: 'left', value: 'external.id', },
+				{ text: GlobalUtility.$trans.t('users.externalId'), align: 'left', value: 'external.externalId', },
+				{ text: GlobalUtility.$trans.t('users.roles'), align: 'left', value: 'roles' },
+				{ text: GlobalUtility.$trans.t('users.actions'), align: 'right', value: 'action', sortable: false }
 			];
 		}
 	}

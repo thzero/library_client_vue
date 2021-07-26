@@ -2,7 +2,7 @@
 import baseEdit from './baseEdit';
 
 export default {
-	name: 'EditControl',
+	name: 'BaseEditControl',
 	extends: baseEdit,
 	props: {
 		vid: {
