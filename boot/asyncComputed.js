@@ -1,7 +1,7 @@
 import AsyncComputed from 'vue-async-computed';
 
 export default async ({
-	Vue
+	framework
 }) => {
-	Vue.use(AsyncComputed);
+	framework.use(AsyncComputed);
 };
