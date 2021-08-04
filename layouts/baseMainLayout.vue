@@ -4,8 +4,6 @@ import LibraryConstants from '@thzero/library_client/constants';
 import GlobalUtility from '@thzero/library_client/utility/global';
 
 import baseLayout from './baseLayout';
-import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
-import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
 
 import DialogSupport from '@/library_vue/components/support/dialog';
 
@@ -13,10 +11,6 @@ const auth = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SE
 
 export default {
 	name: 'BaseMainLayout',
-	components: {
-		VLayoutFooter,
-		VLoadingOverlay
-	},
 	extends: baseLayout,
 	data: () => ({
 		closeOnContentClick: true,
