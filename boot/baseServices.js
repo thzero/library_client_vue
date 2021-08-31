@@ -8,7 +8,7 @@ import storeService from '../service/store';
 import translateService from '../service/translate';
 
 class VueBaseServices extends AdminBaseServices {
-	_initializInjector(framework, injector) {
+	_initializeInjector(framework, injector) {
 		framework.prototype.$injector = injector;
 		GlobalUtility.$injector = injector;
 	}
