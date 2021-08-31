@@ -1,49 +1,49 @@
 {
-    "name": "@thzero/library_client_vue",
-    "version": "0.13.16",
-    "version_major": 0,
-    "version_minor": 13,
-    "version_patch": 16,
-    "version_date": "08/22/2021",
-    "description": "An opinionated library of common functionality to bootstrap a VueJs based SPA application.",
-    "author": "thZero",
-    "license": "MIT",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/thzero/library_client_vue.git"
-    },
-    "bugs": {
-      "url": "https://github.com/thzero/library_client_vue/issues"
-    },
-    "homepage": "https://github.com/thzero/library_client_vue#readme",
-    "scripts": {
-      "cli-update": "./node_modules/.bin/library-cli --updateversion --pi",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-      "@thzero/library_client": "^0.13",
-      "easy-rbac": "^3.1.1",
-      "highlight.js": "^11.2.0",
-      "marked": "^3.0.0",
-      "mitt": "^3.0.0",
-      "vee-validate": "^3.4.11",
-      "vue": "^2.6.14",
-      "vue-async-computed": "^3.9.0",
-      "vue-i18n": "^8.25.0",
-      "vue-router": "^3.5.2",
-      "vue-scrollto": "^2.20.0",
-      "vue-template-compiler": "^2.6.14",
-      "vuetify-datetime-picker": "^2.1.1",
-      "vuetify-loader": "^1.7.2",
-      "vuex-persist": "^3.1.3"
-    },
-    "devDependencies": {
-      "@thzero/library_common": "^0.13",
-      "@thzero/library_cli": "^0.13"
-    },
-    "peerDependencies": {
-      "@alienfast/i18next-loader": "^1.1.4",
-      "@mdi/font": "^5.9.55",
-      "material-design-icons-iconfont": "^6.1.0"
-    }
+  "name": "@thzero/library_client_vue",
+  "version": "0.13.17",
+  "version_major": 0,
+  "version_minor": 13,
+  "version_patch": 17,
+  "version_date": "08/31/2021",
+  "description": "An opinionated library of common functionality to bootstrap a VueJs based SPA application.",
+  "author": "thZero",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thzero/library_client_vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thzero/library_client_vue/issues"
+  },
+  "homepage": "https://github.com/thzero/library_client_vue#readme",
+  "scripts": {
+    "cli-update": "./node_modules/.bin/library-cli --updateversion --pi",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@thzero/library_client": "^0.13",
+    "easy-rbac": "^3.1.1",
+    "highlight.js": "^11.2.0",
+    "marked": "^3.0.0",
+    "mitt": "^3.0.0",
+    "vee-validate": "^3.4.11",
+    "vue": "^2.6.14",
+    "vue-async-computed": "^3.9.0",
+    "vue-i18n": "^8.25.0",
+    "vue-router": "^3.5.2",
+    "vue-scrollto": "^2.20.0",
+    "vue-template-compiler": "^2.6.14",
+    "vuetify-datetime-picker": "^2.1.1",
+    "vuetify-loader": "^1.7.2",
+    "vuex-persist": "^3.1.3"
+  },
+  "devDependencies": {
+    "@thzero/library_common": "^0.13",
+    "@thzero/library_cli": "^0.13"
+  },
+  "peerDependencies": {
+    "@alienfast/i18next-loader": "^1.1.4",
+    "@mdi/font": "^5.9.55",
+    "material-design-icons-iconfont": "^6.1.0"
   }
+}
