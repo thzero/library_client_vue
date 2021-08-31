@@ -4,8 +4,4 @@
 
 ### Installation
 
-Include as a submodule namned 'library_vue' in the Vue application's source folder.
-
-```
-git submodule add https://github.com/thzero/library_client_vue "src/library_vue"
-```
+[![NPM](https://nodei.co/npm/@thzero/library_common.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
