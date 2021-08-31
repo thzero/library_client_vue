@@ -1,13 +1,13 @@
 import GlobalUtility from '@thzero/library_client/utility/global';
 
-import BaseServices from '@thzero/library_client/boot/baseServices';
+import AdminBaseServices from '@thzero/library_client/boot/adminBaseServices';
 
 import eventService from '../service/event';
 import routerService from '../service/router';
 import storeService from '../service/store';
 import translateService from '../service/translate';
 
-class VueBaseServices extends BaseServices {
+class VueBaseServices extends AdminBaseServices {
 	_initializInjector(framework, injector) {
 		framework.prototype.$injector = injector;
 		GlobalUtility.$injector = injector;
