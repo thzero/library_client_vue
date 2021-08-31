@@ -1,0 +1,55 @@
+name: Test CI
+
+on:
+    workflow_dispatch:
+      inputs:
+        label:
+          description: 'Label'
+          default: 'Npm Publish - Version Update'
+        logLevel:
+          description: 'Log level'
+          required: true
+          default: 'warning'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    if: github.actor == github.event.repository.owner.login
+
+    strategy:
+      matrix:
+        #node-version: [8.x, 10.x, 12.x]
+        node-version: [13.x]
+
+    steps:
+    - name: Input
+      run: |
+        echo label: ${{ github.event.inputs.label }}
+    - uses: actions/checkout@v2
+      with:
+        ref: dev
+        fetch-depth: 0
+    - name: Node Dependencies
+      run: |
+        npm install --no-package-lock
+    - name: Package
+      run: |
+        cat package.json
+    - name: Initialize Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        registry-url: 'https://registry.npmjs.org'
+    - name: Git Diff Check
+      id: git-diff-changes
+      run: |
+        git diff origin/master origin/dev --shortstat
+        diff_check=$(git diff origin/master origin/dev --shortstat)
+        echo $diff_check
+        echo ${#diff_check}
+        diff_check_length=${#diff_check}
+        echo ::set-output name=diff_check_length::$diff_check_length
+    - name: Git Check Output
+      run: |
+        echo ${{ steps.git-diff-changes.outputs.diff_check_length }}
