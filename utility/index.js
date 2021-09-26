@@ -124,45 +124,8 @@ class Utility {
 		return (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth) * 0.25;
 	}
 
-	static randomKeyGen() {
-		const high = 100000000000;
-		const low = 0;
-		return Math.floor(Math.random() * (high - low) + low);
-	}
-
-	static selectBlank(array, prompt) {
-		if (!array)
-			return array;
-
-		prompt = prompt ? '<' + prompt + '>' : '';
-
-		const temp = array.slice(0);
-		temp.unshift({ id: null, name: prompt });
-		return temp;
-	}
-
 	static settings() {
 		return GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_SETTINGS);
-	}
-
-	static updateArrayById(array, object) {
-		if (!object)
-			return;
-
-		// let index = array.findIndex(function(element) {
-		// 	return element && element.id == object.id
-		// })
-		// if (index === -1)
-		// 	array.push(object)
-		// else
-		// 	array[index] = object
-
-		// return array
-		const result = [
-			...array.filter(element => element.id !== object.id),
-			object
-		];
-		return result;
 	}
 }
 

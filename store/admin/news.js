@@ -2,7 +2,6 @@ import LibraryConstants from '@thzero/library_client/constants';
 
 import GlobalUtility from '@thzero/library_client/utility/global';
 import LibraryUtility from '@thzero/library_common/utility';
-import VueUtility from '../../utility/index';
 
 const store = {
 	state: {
@@ -49,7 +48,7 @@ const store = {
 		setAdminNews(state, params) {
 			this.$logger.debug('store.admin.news', 'setAdminNews', 'items.a', params.item, params.correlationId);
 			this.$logger.debug('store.admin.news', 'setAdminNews', 'items.b', state.news, params.correlationId);
-			state.news = VueUtility.updateArrayById(state.news, params.item);
+			state.news = LibraryUtility.updateArrayByObject(state.news, params.item);
 			this.$logger.debug('store.admin.news', 'setAdminNews', 'items.c', state.news, params.correlationId);
 		},
 		setAdminNewsListing(state, params) {
