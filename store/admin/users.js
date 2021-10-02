@@ -42,7 +42,7 @@ const store = {
 		setAdminUsers(state, params) {
 			this.$logger.debug('store.admin.users', 'setAdminUsers', 'items.a', params.item, params.correlationId);
 			this.$logger.debug('store.admin.users', 'setAdminUsers', 'items.b', state.users, params.correlationId);
-			state.users = LibraryUtility.updateArrayByObject(state.users, params.item);
+			state.users = LibraryUtility.updateArrayByObject(state.users, params.item, true);
 			this.$logger.debug('store.admin.users', 'setAdminUsers', 'items.c', state.users, params.correlationId);
 		},
 		setAdminUsersListing(state, params) {
