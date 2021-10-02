@@ -3,6 +3,8 @@ import LibraryConstants from '@thzero/library_client/constants';
 import GlobalUtility from '@thzero/library_client/utility/global';
 import LibraryUtility from '@thzero/library_common/utility';
 
+import Response from '@thzero/library_common/response';
+
 const store = {
 	state: {
 		users: null
@@ -12,7 +14,7 @@ const store = {
 			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS);
 			const response = await service.delete(params.correlationId, params.id);
 			this.$logger.debug('store.admin.users', 'deleteAdminUser', 'response', response);
-			if (response && response.success) {
+			if (Response.hasSucceeded(response)) {
 				commit('deleteAdminUser', { correlationId: params.correlationId, id: params.id });
 				GlobalUtility.$store.dispatcher.users.delete(params.correlationId, params.id);
 			}
@@ -28,7 +30,7 @@ const store = {
 			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS);
 			const response = await service.update(params.correlationId, params.item);
 			this.$logger.debug('store.admin.users', 'updateAdminUser', 'response', response);
-			if (response && response.success)
+			if (Response.hasSucceeded(response))
 				commit('setAdminUsers', { correlationId: params.correlationId, item: response.results });
 			return response;
 		}
