@@ -186,7 +186,7 @@ class Services extends BaseServices {
 	_initialize() {
 		// TODO: Define any custom services that you want to be injected.
 		// The format of a function call to inject a service looks like:
-		// this._inject(Constants.InjectorKeys.SERVICE_YOUR_SERVICE, new yourService());
+		// this._injectService(Constants.InjectorKeys.SERVICE_YOUR_SERVICE, new yourService());
 		// 'yourService' is a defined constant from an import.
 		// The keys are recommended to be kept in a Constants file.
 	}
