@@ -1,9 +1,9 @@
 {
   "name": "@thzero/library_client_vue",
-  "version": "0.15.7",
+  "version": "0.15.8",
   "version_major": 0,
   "version_minor": 15,
-  "version_patch": 7,
+  "version_patch": 8,
   "version_date": "02/19/2022",
   "description": "An opinionated library of common functionality to bootstrap a VueJs based SPA application.",
   "author": "thZero",
