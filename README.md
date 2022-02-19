@@ -6,8 +6,6 @@
 
 An opinionated library of common functionality to bootstrap a VueJs based SPA application.
 
-<<<<<<< HEAD
-[![NPM](https://nodei.co/npm/@thzero/library_common.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
 =======
 ## Requirements
 
@@ -680,4 +678,3 @@ Replace the contents of the 'public/index.html' with the following code.
 </html>
 
 ```
->>>>>>> b9bc64f0a9c29206af7d6bd735a02113e52f0341
