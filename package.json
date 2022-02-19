@@ -39,7 +39,7 @@
     "vuex-persist": "^3.1.3"
   },
   "devDependencies": {
-    "@thzero/library_cli": "^0.15.4"
+    "@thzero/library_cli": "^0.15"
   },
   "peerDependencies": {
     "@alienfast/i18next-loader": "^1",
