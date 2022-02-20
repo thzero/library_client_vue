@@ -6,7 +6,6 @@
 
 An opinionated library of common functionality to bootstrap a VueJs based SPA application.
 
-=======
 ## Requirements
 
 ### Vue
