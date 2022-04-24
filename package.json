@@ -24,7 +24,7 @@
     "@thzero/library_client": "^0.15",
     "@thzero/library_common": "^0.15",
     "easy-rbac": "^3.2.0",
-    "highlight.js": "^11.5.0",
+    "highlight.js": "^11.5.1",
     "mitt": "^3.0.0",
     "vee-validate": "^3.4.13",
     "vue": "^2.6.14",
