@@ -21,8 +21,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@thzero/library_client": "^0.15",
-    "@thzero/library_common": "^0.15",
+    "@thzero/library_client": "^0.16",
+    "@thzero/library_common": "^0.16",
     "easy-rbac": "^3.2.0",
     "highlight.js": "^11.6.0",
     "mitt": "^3.0.0",
@@ -41,7 +41,6 @@
   "peerDependencies": {
     "@alienfast/i18next-loader": "^1",
     "@mdi/font": "^6",
-    "@thzero/library_common": "^0.16",
     "material-design-icons-iconfont": "^6"
   }
 }
