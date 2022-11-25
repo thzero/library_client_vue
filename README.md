@@ -21,11 +21,16 @@ In order to use this opinionated library successfully, it is advised to create a
 
 [![NPM](https://nodei.co/npm/@thzero/library_client_vue.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
 
-### Dependencies
+### Requirements
+
+#### Packages
+
+* [![NPM](https://nodei.co/npm/@thzero/library_common.png?compact=true)](https://npmjs.org/package/@thzero/library_common)
+* [![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
 
 The following dependencies are required.
 
-#### Dev
+##### Dev
 
 These dependencies must be installed as 'devDependencies'.
 
@@ -36,7 +41,7 @@ These dependencies must be installed as 'devDependencies'.
 * vuetify-loader
 * vue-cli-plugin-vuetify
 
-#### Vue
+##### Vue
 
 The following library contains the Vue components required by this module as needs to be installed as a submodule
 
@@ -44,24 +49,13 @@ The following library contains the Vue components required by this module as nee
 git submodule add https://github.com/thzero/library_client_vue_vue "src\library_vue"
 ```
 
-##### Refresh
+## Refresh
 
 To refresh this submodule, you can execute the following commands
 
 ```
 git submodule init
 git submodule update --remote
-```
-
-### CLI
-
-It it advised to install the ![@thzero/library_cli](https://www.npmjs.com/package/@thzero/library_cli) command-line interface as a development dependency.
-
-If using the CLI, here are two useful scripts for the package.json
-
-```,
-	"cli-id": "./node_modules/.bin/library-cli --generate",
-	"cli-update": "./node_modules/.bin/library-cli --updateversion --pi"
 ```
 
 ## Configuration
