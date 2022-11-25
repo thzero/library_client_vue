@@ -8,6 +8,10 @@ An opinionated library of common functionality to bootstrap a VueJs based SPA ap
 
 ## Requirements
 
+### NodeJs
+
+[NodeJs](https://nodejs.org) version 18+
+
 ### Vue
 
 In order to use this opinionated library successfully, it is advised to create a new Vue application using the vue-cli with the following options.
@@ -21,24 +25,20 @@ In order to use this opinionated library successfully, it is advised to create a
 
 [![NPM](https://nodei.co/npm/@thzero/library_client_vue.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
 
-### Requirements
+### Dependencies
 
-#### Packages
+These dependencies must be installed as 'Dependencies'.  Version numbers are important.
 
-* [![NPM](https://nodei.co/npm/@thzero/library_common.png?compact=true)](https://npmjs.org/package/@thzero/library_common)
-* [![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
-* [![NPM](https://nodei.co/npm/@thzero/library_client_vue.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
-
-##### Dependencies
-
-These dependencies must be installed.  Version numbers, where provided, are important.
+[![NPM](https://nodei.co/npm/@thzero/library_common.png?compact=true)](https://npmjs.org/package/@thzero/library_common)
+[![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
+[![NPM](https://nodei.co/npm/@thzero/library_client_vue.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
 
 * "core-js": "^3.26.1 "
 * "vue": "^2.6.14"
 * "vue-router": "^3.6.5"
 * "vuex": "^3.6.2"
 
-##### Dev Dependencies
+### Dev Dependencies
 
 These dependencies must be installed as 'devDependencies'.  Version numbers are important.
 
@@ -64,7 +64,7 @@ These dependencies must be installed as 'devDependencies'.  Version numbers are 
 * "vue-template-compiler": "^2.7.14",
 * "vuetify-loader": "^1.9.2"
 
-##### Package.json
+### Package.json
 
 Add the following to the package.json for postcss process.ing
 
@@ -84,7 +84,7 @@ Add the following to the package.json for postcss process.ing
   ]
 ```
 
-##### Vue
+### Sub Modules
 
 The following library contains the Vue components required by this module as needs to be installed as a submodule
 
