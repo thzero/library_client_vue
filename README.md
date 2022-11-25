@@ -21,47 +21,84 @@ In order to use this opinionated library successfully, it is advised to create a
 
 [![NPM](https://nodei.co/npm/@thzero/library_client_vue.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
 
-### Dependencies
+### Requirements
 
-The following dependencies are required.
+#### Packages
 
-#### Dev
+* [![NPM](https://nodei.co/npm/@thzero/library_common.png?compact=true)](https://npmjs.org/package/@thzero/library_common)
+* [![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
+* [![NPM](https://nodei.co/npm/@thzero/library_client_vue.png?compact=true)](https://npmjs.org/package/@thzero/library_client_vue)
 
-These dependencies must be installed as 'devDependencies'.
+##### Dependencies
 
-* @alienfast/i18next-loader
-* @mdi/font
-* babel-plugin-lodash
-* material-design-icons-iconfont
-* vuetify-loader
-* vue-cli-plugin-vuetify
+These dependencies must be installed.  Version numbers, where provided, are important.
 
-#### Vue
+* "core-js": "^3.26.1 "
+* "vue": "^2.6.14"
+* "vue-router": "^3.6.5"
+* "vuex": "^3.6.2"
+
+##### Dev Dependencies
+
+These dependencies must be installed as 'devDependencies'.  Version numbers are important.
+
+* "@alienfast/i18next-loader": "^1.1.4",
+* "@mdi/font": "^7.0.96",
+* "@vue/cli-plugin-babel": "~4.5.13",
+* "@vue/cli-plugin-router": "~4.5.13",
+* "@vue/cli-plugin-vuex": "~4.5.13",
+* "@vue/cli-service": "~4.5.13",
+* "@vue/eslint-config-standard": "^5.1.2",
+* "babel-eslint": "^10.1.0",
+* "babel-plugin-lodash": "^3.3.4",
+* "eslint": "^6.7.2",
+* "eslint-plugin-import": "^2.20.2",
+* "eslint-plugin-node": "^11.1.0",
+* "eslint-plugin-promise": "^4.2.1",
+* "eslint-plugin-standard": "^4.0.0",
+* "eslint-plugin-vue": "^7.0.0",
+* "material-design-icons-iconfont": "^6.7.0",
+* "sass": "~1.32",
+* "sass-loader": "^8.0.2",
+* "vue-cli-plugin-vuetify": "^2.5.8",
+* "vue-template-compiler": "^2.7.14",
+* "vuetify-loader": "^1.9.2"
+
+##### Package.json
+
+Add the following to the package.json for postcss process.ing
+
+```
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 4%",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 FirefoxAndroid versions",
+    "not Edge <= 18"
+  ]
+```
+
+##### Vue
 
 The following library contains the Vue components required by this module as needs to be installed as a submodule
 
 ```
-git submodule add https://github.com/thzero/library_client_vue_vue "src\library_vue"
+git submodule add https://github.com/thzero/library_client_vue_components "src\library_vue"
 ```
 
-##### Refresh
+## Refresh
 
 To refresh this submodule, you can execute the following commands
 
 ```
 git submodule init
 git submodule update --remote
-```
-
-### CLI
-
-It it advised to install the ![@thzero/library_cli](https://www.npmjs.com/package/@thzero/library_cli) command-line interface as a development dependency.
-
-If using the CLI, here are two useful scripts for the package.json
-
-```,
-	"cli-id": "./node_modules/.bin/library-cli --generate",
-	"cli-update": "./node_modules/.bin/library-cli --updateversion --pi"
 ```
 
 ## Configuration
@@ -95,14 +132,19 @@ The configuration file has the following basic format.
 
 To use the backend APIs feature, install a REST communication dependency, i.e.
 
-![@thzero/library_client_vue_service_rest_axios](https://www.npmjs.com/package/@thzero/library_client_vue_service_rest_axios).
+![@thzero/library_client_vue_service_rest_fetch](https://www.npmjs.com/package/@thzero/library_client_vue_service_rest_fetch)
+
+or
+
+![@thzero/library_client_vue_service_rest_axios](https://www.npmjs.com/package/@thzero/library_client_vue_service_rest_axios)
 
 ### Development
 
 * Copy the files in the '_config' folder to the root folder of the application.
 
-  * .browserslistrc
+  * .eslintignore
   * .eslintrc
+  * .postcssrc.js
   * babel.config.js
   * vue.config.js
 
