@@ -18,7 +18,6 @@ In order to use this opinionated library successfully, it is advised to create a
 
 * babel
 * router
-* vuex
 * eslint
 
 ## Installation
@@ -454,76 +453,8 @@ See ![Vue l18n](https://kazupon.github.io/vue-i18n/) for documentation on
 
 ### Store.js
 
-Setup the 'store/store.js' as follows:
-
-```
-import Vue from 'vue';
-import VuexPersist from 'vuex-persist';
-
-import LibraryConstants from '@thzero/library_client_vue/constants';
-
-import BaseStore from '@/library_vue/store';
-
-class AppStore extends BaseStore {
-	_init() {
-		return {
-			modules: {
-			},
-			state: {
-				version: null
-			},
-			actions: {
-				async getVersion({ commit }, correlationId) {
-					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_VERSION);
-					const version = await service.version(correlationId);
-					this.$logger.debug('store', 'getVersion', 'version', version, correlationId);
-					commit('setVersion', { correlationId : correlationId, version: version });
-				},
-				async initialize({ commit }, correlationId) {
-          // TODO: Call any services that are required during initialization
-				},
-				async setSettings({ commit }, params) {
-					commit('setSettings', params);
-				}
-			},
-			getters: {
-			},
-			mutations: {
-				setVersion(state, params) {
-					this.$logger.debug('store', 'setVersion', 'version', params.version, params.correlationId);
-					state.version = params.version;
-				}
-			},
-			dispatcher: {
-				async getVersion(correlationId) {
-					await GlobalUtility.$store.dispatch('getVersion', correlationId);
-				},
-				async initialize(correlationId) {
-					await GlobalUtility.$store.dispatch('initialize', correlationId);
-				}
-			}
-		};
-	}
-
-	_initModules() {
-    // Initialize any store modules
-    // i.e. this._addModule('yourmodulename', yourmodule);
-	}
-
-	_initPluginPersist() {
-		return new VuexPersist({
-			storage: window.localStorage,
-			reducer: state => ({
-        // TODO: any reducers?
-				version: state.version
-			})
-		});
-	}
-}
-
-export default AppStore;
-
-```
+Use either 
+![@thzero/library_client_vue3_store_pinia](https://www.npmjs.com/package/@thzero/library_client_vue3_store_pinia) or ![@thzero/library_client_vue3_store_vuex](https://www.npmjs.com/package/@thzero/library_client_vue3_store_vuex).  The Pinia based library is preferred as the Vuex library is no longer be updated.
 
 ### App.vue
 
