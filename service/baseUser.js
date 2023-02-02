@@ -1,4 +1,4 @@
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import BaseUserService from '@thzero/library_client/service/baseUser';
 
@@ -12,7 +12,7 @@ class VueBaseUserService extends BaseUserService {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this._serviceStore = this._injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 	}
 
 	async resetUser(correlationId) {

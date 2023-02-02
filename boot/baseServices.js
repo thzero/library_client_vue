@@ -1,4 +1,4 @@
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import AdminBaseServices from '@thzero/library_client/boot/adminBaseServices';
 
@@ -10,7 +10,7 @@ import translateService from '../service/translate';
 class VueBaseServices extends AdminBaseServices {
 	_initializeInjector(framework, injector) {
 		framework.prototype.$injector = injector;
-		GlobalUtility.$injector = injector;
+		LibraryClientUtility.$injector = injector;
 	}
 
 	_initializeEvent(injector) {

@@ -303,7 +303,7 @@ class YourServiceNameService extends Service {
 		await super.init(injector);
 
 		// TODO: Inject any services into your component
-		// i.e. this._serviceYourService = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_YOUR_SERVICE);
+		// i.e. this._serviceYourService = this._injector.getService(Constants.InjectorKeys.SERVICE_YOUR_SERVICE);
 	}
 
 	// TODO: define any class methods that the service exposes
@@ -565,7 +565,7 @@ const router = new VueRouter({
 // eslint-disable-next-line
 router.beforeResolve((to, from, next) => {
 	if (to.matched.some(record => record.meta.notFound)) {
-		GlobalUtility.$navRouter.push('/notFound');
+		LibraryClientUtility.$navRouter.push('/notFound');
 		return;
 	}
 
