@@ -13,5 +13,5 @@ export default async ({ framework, app }) => {
 	});
 	app.i18n = i18n;
 	framework.prototype.$trans = i18n;
-	GlobalUtility.$trans = il8n;
+	LibraryClientUtility.$trans = il8n;
 };

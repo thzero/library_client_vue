@@ -1,7 +1,7 @@
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
-import LibraryUtility from '@thzero/library_common/utility';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 const store = {
 	state: {
@@ -12,7 +12,7 @@ const store = {
 			commit('deleteNews', params);
 		},
 		async getLatestNews({ commit }, correlationId) {
-			const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_NEWS);
+			const service = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_NEWS);
 			const response = await service.latest(correlationId);
 			this.$logger.debug('store.news', 'getLatestNews', 'response', response);
 			commit('setLatestNews', { correlationId: correlationId, latest: response.success && response.results ? response.results.data : null });
@@ -20,7 +20,7 @@ const store = {
 	},
 	mutations: {
 		deleteNews(state, params) {
-			LibraryUtility.deleteArrayById(state.latest, params.id);
+			LibraryCommonUtility.deleteArrayById(state.latest, params.id);
 		},
 		setLatestNews(state, params) {
 			this.$logger.debug('store.news', 'setLatest', 'item.a', params.latest, params.correlationId);
@@ -31,10 +31,10 @@ const store = {
 	},
 	dispatcher: {
 		async delete(correlationId, id) {
-			await GlobalUtility.$store.dispatch('deleteNews', { correlationId: correlationId, id: id });
+			await LibraryClientUtility.$store.dispatch('deleteNews', { correlationId: correlationId, id: id });
 		},
 		async getLatest(correlationId) {
-			await GlobalUtility.$store.dispatch('getLatestNews', correlationId);
+			await LibraryClientUtility.$store.dispatch('getLatestNews', correlationId);
 		}
 	}
 };
